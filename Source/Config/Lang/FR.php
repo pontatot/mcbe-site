@@ -7,7 +7,7 @@ class FR extends AbstractLang
         //globals
         'home_page'=>'Accueil',
         'upload_page'=>'Téléverser',
-        'about_page'=>'À propos de moi',
+        'settings_page'=>'Paramètre',
         'contact_page'=>'Me contacter',
         'error_page'=>'Erreur',
         'watch_page'=>'Regarde',
@@ -33,9 +33,10 @@ class FR extends AbstractLang
 
 
 
-        //about page
-        'about_title'=>'A propos de moi',
-        'about_desc'=>'Bonjour',
+        //settings page
+        'settings_language'=>'Langue',
+        'settings_themes'=>'Theme',
+        'settings_submit'=>'Enregistrer',
 
 
 

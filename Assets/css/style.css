@@ -1,7 +1,7 @@
 :root {
     --bg-color: #04080F;
-    --sext-color: #A1C6EA;
-    --loink-color: #507DBC;
+    --text-color: #A1C6EA;
+    --link-color: #507DBC;
 }
 
 html, body {
@@ -11,7 +11,7 @@ html, body {
 
 body {
     background-color: var(--bg-color);
-    color: var(--sext-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     font: 16px Sans-Serif;
@@ -25,7 +25,7 @@ nav, main, footer {
 
 nav {
     padding-top: 5px;
-    border: 1px solid var(--sext-color);
+    border: 1px solid var(--text-color);
 }
 
 nav ul {
@@ -78,17 +78,31 @@ nav ul li:hover {
     }
 }
 
+form section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px;
+}
+
+form section div {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
 
 /*links*/
 a {
-    border-color: var(--loink-color);
+    border-color: var(--link-color);
     border-width: 1px;
     border-style: solid;
     text-decoration: none;
-    color: var(--sext-color);
+    color: var(--text-color);
     padding: 5px;
     scale: none;
-    transition: scale 200ms;
+    transition: scale 200ms, background-color 500ms;
 }
 
 a p {
@@ -97,19 +111,9 @@ a p {
 }
 
 a:hover {
-    background-color: var(--loink-color);
+    background-color: var(--link-color);
     scale: 125%;
-    transition: scale 200ms;
-}
-
-footer a {
-    scale: none;
-    transition: scale 200ms;
-}
-
-footer a:hover {
-    scale: 125%;
-    transition: scale 200ms;
+    transition: scale 200ms, background-color 500ms;
 }
 
 /*main*/
@@ -165,7 +169,7 @@ label {
 
 /*footer*/
 footer {
-    border: 1px solid var(--sext-color);
+    border: 1px solid var(--text-color);
     text-align:right;
     flex-shrink: 0;
     padding: 20px;

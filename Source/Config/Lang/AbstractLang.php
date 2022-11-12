@@ -7,7 +7,7 @@ abstract class AbstractLang
         //globals
         'home_page'=>null,
         'upload_page'=>null,
-        'about_page'=>null,
+        'settings_page'=>null,
         'contact_page'=>null,
         'error_page'=>null,
         'watch_page'=>null,
@@ -33,9 +33,10 @@ abstract class AbstractLang
 
 
 
-        //about page
-        'about_title'=>null,
-        'about_desc'=>null,
+        //settings page
+        'settings_language'=>null,
+        'settings_themes'=>null,
+        'settings_submit'=>null,
 
 
 

@@ -10,22 +10,46 @@ class Controller
     public static function getLang() : string {
         $lang = "EN";
         if (isset($_SESSION['lang']) and Conf::isSupportedLang(strtoupper($_SESSION['lang']))) $lang = strtoupper($_SESSION['lang']);
-        if (isset($_GET['lang']) and Conf::isSupportedLang(strtoupper($_GET['lang']))) $lang = strtoupper($_GET['lang']);
+        if (isset($_POST['lang']) and Conf::isSupportedLang(strtoupper($_POST['lang']))) $lang = strtoupper($_POST['lang']);
         $_SESSION['lang'] = $lang;
         return $lang;
     }
 
-    public static function isSupportedStyle(string $style) : bool {
-        $supportedStyle = ['1', '2'];
-        return in_array(strtoupper($style), $supportedStyle);
+    public static function getSupportedLang() : array {
+        $langs = [];
+        foreach (Conf::getSupportedLang() as $supportedLang) $langs[] = substr($supportedLang, 0, -4);
+        return $langs;
     }
 
-    public static function getStyle() : string {
-        $style = "1";
+    private static array $STYLES;
+
+    public static function getStyles() : array {
+        if (!isset(static::$STYLES)) {
+            static::$STYLES = ['blue'=>['bg-color'=>'#04080F', 'text-color'=>'#A1C6EA', 'link-color'=>'#507DBC']];
+            $myfile = fopen(__DIR__ . "/../Config/style.json", "r");
+            $content = fread($myfile,filesize(__DIR__ . "/../Config/style.json"));
+            fclose($myfile);
+            foreach (json_decode($content, true) as $key => $value) {
+                static::$STYLES[$key] = $value;
+            }
+        }
+        return static::$STYLES;
+    }
+
+    public static function isSupportedStyle(string $style) : bool {
+        return isset(static::getStyles()[$style]);
+    }
+
+    public static function getStyleName() : string {
+        $style = "blue";
         if (isset($_SESSION['style']) and static::isSupportedStyle($_SESSION['style'])) $style = $_SESSION['style'];
-        if (isset($_GET['style'])  and static::isSupportedStyle($_GET['style'])) $style = $_GET['style'];
+        if (isset($_POST['style'])  and static::isSupportedStyle($_POST['style'])) $style = $_POST['style'];
         $_SESSION['style'] = $style;
         return $style;
+    }
+
+    public static function getStyle() : array {
+        return static::$STYLES[static::getStyleName()];
     }
 
     /** @noinspection PhpUnusedParameterInspection */

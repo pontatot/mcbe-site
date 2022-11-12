@@ -7,7 +7,9 @@ session_start();
 $lang = Controller::getLang() ?? "EN";
 $uploadError = $lang::getItem('upload_video-missing');
 if (isset($_FILES["video_upload"])) {
-    $uploadError = VideoController::upload($_POST['title'], $_POST['description'], $_FILES["video_upload"]["tmp_name"], pathinfo($_FILES["video_upload"]["full_path"],  PATHINFO_EXTENSION) ?? 'mp4');
+    $ext = pathinfo($_FILES["video_upload"]["full_path"],  PATHINFO_EXTENSION);
+    if($ext == null or $ext == "") $ext = 'mp4';
+    $uploadError = VideoController::upload($_POST['title'], $_POST['description'], $_FILES["video_upload"]["tmp_name"], $ext);
     if ($uploadError == null) {
         unset($_SESSION['title']);
         unset($_SESSION['description']);

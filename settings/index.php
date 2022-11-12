@@ -5,4 +5,4 @@ spl_autoload_register(function ($className) {
 });
 session_start();
 $lang = Controller::getLang() ?? "EN";
-Controller::loadView('about.php', $lang::getItem('about_page'));
+Controller::loadView('settings.php', $lang::getItem('settings_page'));

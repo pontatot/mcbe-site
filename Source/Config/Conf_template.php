@@ -1,6 +1,6 @@
 <?php
 //rename this file to 'Conf.php'
-class Conf
+class Conf_template
 {
     static private array $data = [
         "token"=>"any-discord-bot-token",
