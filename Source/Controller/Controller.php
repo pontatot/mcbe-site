@@ -10,7 +10,7 @@ class Controller
     public static function getLang() : string {
         $lang = "EN";
         if (isset($_SESSION['lang']) and Conf::isSupportedLang(strtoupper($_SESSION['lang']))) $lang = strtoupper($_SESSION['lang']);
-        if (isset($_POST['lang']) and Conf::isSupportedLang(strtoupper($_POST['lang']))) $lang = strtoupper($_POST['lang']);
+        if (isset($_GET['lang']) and Conf::isSupportedLang(strtoupper($_GET['lang']))) $lang = strtoupper($_GET['lang']);
         $_SESSION['lang'] = $lang;
         return $lang;
     }
@@ -43,13 +43,13 @@ class Controller
     public static function getStyleName() : string {
         $style = "blue";
         if (isset($_SESSION['style']) and static::isSupportedStyle($_SESSION['style'])) $style = $_SESSION['style'];
-        if (isset($_POST['style'])  and static::isSupportedStyle($_POST['style'])) $style = $_POST['style'];
+        if (isset($_GET['style'])  and static::isSupportedStyle($_GET['style'])) $style = $_GET['style'];
         $_SESSION['style'] = $style;
         return $style;
     }
 
     public static function getStyle() : array {
-        return static::$STYLES[static::getStyleName()];
+        return static::getStyles()[static::getStyleName()];
     }
 
     /** @noinspection PhpUnusedParameterInspection */

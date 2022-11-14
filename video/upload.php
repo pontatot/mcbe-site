@@ -18,6 +18,9 @@ if (isset($_FILES["video_upload"])) {
         $_SESSION['description'] = $_POST['description'];
     }
 
+} else {
+    $_SESSION['title'] = $_POST['title'];
+    $_SESSION['description'] = $_POST['description'];
 }
 $url = 'Location: ../' . (($uploadError == null) ? 'home' : 'upload/?error=' . urlencode($lang::getItem('upload_video-upload-error') . ": $uploadError"));
 header($url);

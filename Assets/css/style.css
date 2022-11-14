@@ -78,18 +78,19 @@ nav ul li:hover {
     }
 }
 
-form section {
+.settings section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
     margin: 10px;
 }
 
-form section div {
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
+.settings a p {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 
