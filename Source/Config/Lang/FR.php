@@ -30,6 +30,7 @@ class FR extends AbstractLang
         'upload_video-upload-error'=>'Erreur de Téléversement',
         'upload_video-missing'=>'Video manquante',
         'upload_video-database-upload'=>'Erreur d\'insertion en base de donnée',
+        'upload_video-wrong-format'=>'Mauvais type de fichier, demande type vidéo',
 
 
 

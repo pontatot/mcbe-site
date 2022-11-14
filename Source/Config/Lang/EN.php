@@ -30,6 +30,7 @@ class EN extends AbstractLang
         'upload_video-upload-error'=>'Failed to upload video',
         'upload_video-missing'=>'No video to upload',
         'upload_video-database-upload'=>'Failed to insert into Database',
+        'upload_video-wrong-format'=>'Wrong video format, requires type video',
 
 
 

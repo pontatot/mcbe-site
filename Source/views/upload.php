@@ -7,7 +7,7 @@ echo (isset($_GET['error'])? "<h1>{$_GET['error']}</h1>": "")
 ?>
 <form action="../video/upload.php" method="post" enctype="multipart/form-data">
     <label for="video_upload"><?php echo htmlspecialchars($lang::getItem('upload_vido-upload-label')); ?></label>
-    <input type="file" id="video_upload" name="video_upload" required>
+    <input type="file" id="video_upload" name="video_upload" accept="video/*" required>
     <label for="title"><?php echo htmlspecialchars($lang::getItem('upload_video-title-label')); ?></label>
     <input type="text" name="title" placeholder="<?php echo $lang::getItem('upload_video-title-placeholder'); ?>" value="<?php echo $_SESSION['title']; ?>" required id="title">
     <label for="description"><?php echo htmlspecialchars($lang::getItem('upload_video-description-label')); ?></label>

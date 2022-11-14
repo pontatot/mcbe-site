@@ -30,6 +30,7 @@ abstract class AbstractLang
         'upload_video-upload-error'=>null,
         'upload_video-missing'=>null,
         'upload_video-database-upload'=>null,
+        'upload_video-wrong-format'=>null,
 
 
 
