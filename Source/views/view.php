@@ -19,7 +19,7 @@ echo "--bg-color: {$style['bg-color']}; --text-color: {$style['text-color']}; --
  ?>
         }
 <?php
-    if (isset($customStyle)) echo $customStyle;
+    if (isset($customStyle)) echo htmlspecialchars($customStyle);
  ?>
     </style>
 </head>
@@ -28,11 +28,11 @@ echo "--bg-color: {$style['bg-color']}; --text-color: {$style['text-color']}; --
     <nav>
         <div>
             <div>
-                <div><a href="../settings/"><p><?php echo $lang::getItem('settings_page'); ?></p><img class="icons" src="../Assets/img/settings.png" alt="Settings"></a></div>
+                <div><a href="../settings/"><p><?php echo htmlspecialchars($lang::getItem('settings_page')); ?></p><img class="icons" src="../Assets/img/settings.png" alt="Settings"></a></div>
             </div>
             <ul>
                 <?php
-                foreach (['home', 'upload', 'contact'] as $page) echo '<li><a href="../' . $page . '/">' . $lang::getItem($page . '_page') . '</a></li>'
+                foreach (['home', 'upload', 'contact'] as $page) echo '<li><a href="../' . $page . '/">' . htmlspecialchars($lang::getItem($page . '_page')) . '</a></li>'
                 ?>
             </ul>
         </div>
@@ -45,7 +45,7 @@ echo "--bg-color: {$style['bg-color']}; --text-color: {$style['text-color']}; --
 </main>
 <footer>
     <a href="../home/">
-        <p><?php echo $lang::getItem('website_foot') ?></p>
+        <p><?php echo htmlspecialchars($lang::getItem('website_foot')) ?></p>
         <img class="icons" src="../Assets/img/image_logo.png" alt="MCBE">
     </a>
 </footer>

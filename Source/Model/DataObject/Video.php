@@ -95,7 +95,7 @@ class Video extends AbstractDataObject
      */
     public function getDescription(): string
     {
-        return $this->description;
+        return $this->description ?? '';
     }
 
     /**

@@ -2,19 +2,19 @@
 $lang = Controller::getLang() ?? "EN";
 ?>
 <div class="settings">
-<h2><?php echo $lang::getItem('settings_language'); ?></h2>
+<h2><?php echo htmlspecialchars($lang::getItem('settings_language')); ?></h2>
 <section>
 <?php
 foreach (Controller::getSupportedLang() as $supportedLang) {
-    echo '<a href=".?lang=' . $supportedLang . '"><p>' . $supportedLang . '</p><img class="icons" src="../Assets/img/' . strtolower($supportedLang) . '.png" alt="' . $supportedLang . '"></a>';
+    echo '<a href=".?lang=' . urlencode($supportedLang) . '"><p>' . htmlspecialchars($supportedLang) . '</p><img class="icons" src="../Assets/img/' . rawurlencode(strtolower($supportedLang)) . '.png" alt="' . htmlspecialchars($supportedLang) . '"></a>';
 }
 ?>
 </section>
-<h2><?php echo $lang::getItem('settings_themes'); ?></h2>
+<h2><?php echo htmlspecialchars($lang::getItem('settings_themes')); ?></h2>
 <section>
 <?php
 foreach (Controller::getStyles() as $key => $values) {
-    echo '<a href=".?style=' . $key . '" class="' . $key . 'style" >' . $key . '</a>';
+    echo '<a href=".?style=' . urlencode($key) . '" class="' . $key . 'style" >' . htmlspecialchars($key) . '</a>';
 }
 ?>
 </section>
