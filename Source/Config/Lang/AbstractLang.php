@@ -11,6 +11,7 @@ abstract class AbstractLang
         'contact_page'=>null,
         'error_page'=>null,
         'watch_page'=>null,
+        'login_page'=>null,
         'website_foot'=>null,
         'lang_fr'=>'FR',
         'lang_en'=>'EN',
@@ -49,6 +50,17 @@ abstract class AbstractLang
         //watch page
         'watch_delete'=>null,
         'watch_download'=>null,
+
+
+        //log in page
+        'login_username-label'=>null,
+        'login_username-placeholder'=>null,
+        'login_password-label'=>null,
+        'login_password-placeholder'=>null,
+        'login_submit-button'=>null,
+        'login_missing'=>null,
+        'login_wrong-credentials'=>null,
+        'login_error'=>null,
 
 
 

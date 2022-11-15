@@ -11,6 +11,7 @@ class FR extends AbstractLang
         'contact_page'=>'Me contacter',
         'error_page'=>'Erreur',
         'watch_page'=>'Regarde',
+        'login_page'=>'Se connecter',
         'website_foot'=>'le site de MCBE',
         'lang_fr'=>'FR',
         'lang_en'=>'EN',
@@ -49,6 +50,17 @@ class FR extends AbstractLang
         //watch page
         'watch_delete'=>'Supprimer',
         'watch_download'=>'Télécharger',
+
+
+        //log in page
+        'login_username-label'=>'Nom d\'utilisateur',
+        'login_username-placeholder'=>'adresse mail/nom de chaine',
+        'login_password-label'=>'Mot de passe',
+        'login_password-placeholder'=>'Votre mot de passe',
+        'login_submit-button'=>'Se connecter',
+        'login_missing'=>'nom d\'utilisateur ou mot de passe manquant',
+        'login_wrong-credentials'=>'nom d\'utilisateur ou mot de passe erroné',
+        'login_error'=>'Erreur de connection',
 
 
 

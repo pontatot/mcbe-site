@@ -11,6 +11,7 @@ class EN extends AbstractLang
         'contact_page'=>'Contact me',
         'error_page'=>'Error',
         'watch_page'=>'Watching',
+        'login_page'=>'Log in',
         'website_foot'=>'MCBE\'s website',
         'lang_fr'=>'FR',
         'lang_en'=>'EN',
@@ -49,6 +50,17 @@ class EN extends AbstractLang
         //watch page
         'watch_delete'=>'Delete',
         'watch_download'=>'Download',
+
+
+        //log in page
+        'login_username-label'=>'Username',
+        'login_username-placeholder'=>'email adress/channel name',
+        'login_password-label'=>'Password',
+        'login_password-placeholder'=>'Your password',
+        'login_submit-button'=>'Log in',
+        'login_missing'=>'Missing username or password',
+        'login_wrong-credentials'=>'Wrong username or password',
+        'login_error'=>'Login error',
 
 
         //error page
