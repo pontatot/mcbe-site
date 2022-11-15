@@ -10,7 +10,7 @@ if (!isset($_GET['video'])) {
     return;
 }
 $videoElement = VideoController::get($_GET['video']);
-if (!is_file('../Assets/vid/' . $_GET['video'] . '.' . $videoElement->getExtension())) {
+if (!$videoElement or !is_file('../Assets/vid/' . $_GET['video'] . '.' . $videoElement->getExtension())) {
     Controller::error($lang::getItem('error_video-not-found') . " " . $_GET['video']);
     return;
 }

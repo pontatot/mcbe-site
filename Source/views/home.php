@@ -7,7 +7,7 @@ $lang = Controller::getLang() ?? "EN";
         <?php
         $items = VideoController::getAll();
         foreach ($items as $item) {
-            echo '<li class=\"grid-item\"><a href="../watch?video=' . urlencode($item->getId()) . '">' . htmlspecialchars($item->getTitle()) . ' - ' . htmlspecialchars($item->getChannel()->getName()) . '</a></li>';
+            echo '<li><a href="../watch?video=' . urlencode($item->getId()) . '">' . htmlspecialchars($item->getTitle()) . ' - ' . htmlspecialchars($item->getChannel()->getName()) . '</a></li>';
         }
         ?>
     </ul>

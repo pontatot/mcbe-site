@@ -38,7 +38,7 @@ class DatabaseConnection
     {
         // L'attribut statique $pdo s'obtient avec la syntaxe static::$pdo
         // au lieu de $this->pdo pour un attribut non statique
-        if (is_null(static::$instance))
+        if (!static::$instance)
             // Appel du constructeur
             static::$instance = new DatabaseConnection();
         return static::$instance;

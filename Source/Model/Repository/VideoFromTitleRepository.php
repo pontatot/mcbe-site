@@ -10,7 +10,7 @@ class VideoFromTitleRepository extends VideoRepository
     public static function insertGet(Video $object): ?Video
     {
         $result = parent::insert($object) ? static::select($object->getTitle()) : null;
-        return ($result != null and get_class($result) == "Video") ? $result : null;
+        return ($result and get_class($result) == "Video") ? $result : null;
     }
 
 }

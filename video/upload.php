@@ -12,7 +12,7 @@ try {
     $ext = pathinfo($_FILES["video_upload"]["full_path"],  PATHINFO_EXTENSION);
     if($ext == "") $ext = 'mp4';
     $mess = VideoController::upload($_POST['title'], $_POST['description'], $_FILES["video_upload"]["tmp_name"], $ext);
-    if ($mess != null) throw new Exception($mess);
+    if ($mess) throw new Exception($mess);
     unset($_SESSION['title']);
     unset($_SESSION['description']);
 } catch (Exception $exception) {

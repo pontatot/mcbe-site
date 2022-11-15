@@ -76,12 +76,12 @@ abstract class AbstractRepository
     public static function insert(AbstractDataObject $object) : bool {
         $sql = "INSERT INTO " . static::getNomTable() . " (";
         foreach (static::getNomsColonnes() as $col) {
-            if ($object->formatTableau()[$col] != null) $sql .= $col . ", ";
+            if ($object->formatTableau()[$col]) $sql .= $col . ", ";
         }
         $sql = substr($sql, 0, -2) .  ") VALUES (";
         $values = array();
         foreach (static::getNomsColonnes() as $col) {
-            if ($object->formatTableau()[$col] != null) {
+            if ($object->formatTableau()[$col]) {
                 $sql .= ":" . $col . "Tag, ";
                 $values[$col . "Tag"] = $object->formatTableau()[$col];
             }
