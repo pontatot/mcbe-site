@@ -3,7 +3,7 @@ spl_autoload_register(function ($className) {
     $path = __DIR__ . "/../Model/Repository/$className.php";
     if (is_file($path)) include_once $path;
 });
-class VideoController
+class VideoController extends Controller
 {
     public static function getAll() : array {
         return VideoRepository::selectAll();
@@ -16,8 +16,8 @@ class VideoController
         return get_class($result) == "Video" ? $result : null;
     }
 
-    public static function upload(string $title, ?string $description, string $tmp_name, string $ext) : ?string {
-        $video = VideoFromTitleRepository::insertGet(new Video(null, $title, $description, 1, null, $ext));
+    public static function upload(int $channel, string $title, ?string $description, string $tmp_name, string $ext) : ?string {
+        $video = VideoFromTitleRepository::insertGet(new Video(null, $title, $description, $channel, null, $ext));
         if ($video) {
             $path = "../Assets/vid/" . $video->getId() . "." . $ext;
             $upload = move_uploaded_file($tmp_name, $path);
@@ -26,7 +26,7 @@ class VideoController
             return $upload ? null : '';
         } else {
             Controller::log('failed to insert ' . $title . ' into database');
-            $lang = Controller::getLang() ?? "EN";
+            $lang = Controller::getLang();
             return $lang::getItem('upload_video-database-upload');
         }
     }

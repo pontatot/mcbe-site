@@ -4,6 +4,6 @@ spl_autoload_register(function ($className) {
     if (is_file($path)) include_once $path;
 });
 session_start();
-$lang = Controller::getLang() ?? "EN";
+$lang = Controller::getLang();
 Controller::loadView('home.php', $lang::getItem('home_page'));
 

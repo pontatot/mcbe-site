@@ -1,5 +1,5 @@
 <?php
-$lang = Controller::getLang() ?? "EN";
+$lang = Controller::getLang();
 ?>
 <h1><?php echo htmlspecialchars($lang::getItem('home_title')); ?></h1>
 <section class="video-list">

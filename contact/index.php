@@ -4,5 +4,5 @@ spl_autoload_register(function ($className) {
     if (is_file($path)) include_once $path;
 });
 session_start();
-$lang = Controller::getLang() ?? "EN";
+$lang = Controller::getLang();
 Controller::loadView('contact.php', $lang::getItem('contact_page'), ["discordUser"=>Controller::getDiscordUser()]);

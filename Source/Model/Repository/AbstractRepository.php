@@ -44,6 +44,27 @@ abstract class AbstractRepository
         return null;
     }
 
+    public static function selectWhere(string $colonne, string $valeur): ?AbstractDataObject
+    {
+        $sql = "SELECT * from " . static::getNomTable() . " WHERE " . $colonne . "=:Tag";
+        // Préparation de la requête
+        $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
+        $values = array(
+            "Tag" => $valeur,
+            //nomdutag => valeur, ...
+        );
+        // On donne les valeurs et on exécute la requête
+        $pdoStatement->execute($values);
+
+        // On récupère les résultats comme précédemment
+        // Note: fetch() renvoie false si pas de voiture correspondante
+        $object = $pdoStatement->fetch();
+        if ($object) {
+            return static::construire($object);
+        }
+        return null;
+    }
+
     public static function delete(string $valeurClePrimaire): bool
     {
         $sql = "DELETE FROM " . static::getNomTable() . " WHERE " . static::getNomClePrimaire() . "=:Tag";

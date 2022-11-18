@@ -1,5 +1,5 @@
 <?php
-//rename this file to 'Conf.php'
+//rename this file to 'Conf.php' and class to 'Conf'
 class Conf_template
 {
     static private array $data = [
@@ -13,6 +13,7 @@ class Conf_template
         'login' => 'login',
         'password' => 'password'
     );
+    private static string $pepper = 'A random string';
     static private array $supportedLanguages;
     public static function getUrl() : string {
         return static::$data['url'] . static::$data['userId'];
@@ -43,6 +44,9 @@ class Conf_template
     }
     public static function isSupportedLang(string $lang) : bool {
         return in_array(strtoupper($lang) . '.php', static::getSupportedLang());
+    }
+    public static function getPepper() : string {
+        return static::$pepper;
     }
 
 }

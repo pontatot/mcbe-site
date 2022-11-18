@@ -2,20 +2,20 @@
 
 class Channel extends AbstractDataObject
 {
-    private int $id;
+    private ?int $id;
     private string $name;
     private ?string $description;
     private string $email;
     private string $password;
 
     /**
-     * @param int $id
+     * @param ?int $id
      * @param string $name
      * @param ?string $description
      * @param string $email
      * @param string $password
      */
-    public function __construct(int $id, string $name, ?string $description, string $email, string $password)
+    public function __construct(?int $id, string $name, ?string $description, string $email, string $password)
     {
         $this->id = $id;
         $this->name = $name;
@@ -27,7 +27,7 @@ class Channel extends AbstractDataObject
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -59,7 +59,7 @@ class Channel extends AbstractDataObject
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }

@@ -27,4 +27,10 @@ class ChannelRepository extends AbstractRepository
     {
         return ["id", "name", "description", "email", "password"];
     }
+    
+    public static function getChannel(string $username): ?Channel
+    {
+        $result = static::selectWhere('name', $username) ?? static::selectWhere('email', $username);
+        return ($result and get_class($result) == "Channel") ? $result : null;
+    }
 }

@@ -1,6 +1,5 @@
 <?php
-$lang = Controller::getLang() ?? "EN";
-//$_POST['title'], $_POST['description'], $_FILES["video_upload"]["tmp_name"]
+$lang = Controller::getLang();
 if (!isset($_SESSION['title'])) $_SESSION['title'] = '';
 if (!isset($_SESSION['description'])) $_SESSION['description'] = '';
 echo (isset($_GET['error'])? "<h1>{$_GET['error']}</h1>": "")
