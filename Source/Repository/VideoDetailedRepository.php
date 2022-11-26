@@ -30,7 +30,7 @@ class VideoDetailedRepository extends AbstractGetableRepository
             $objetFormatTableau['description'],
             $objetFormatTableau['channelId'],
             $objetFormatTableau['upload'],
-            null,
+            $objetFormatTableau['extension'],
             $objetFormatTableau['name'],
             $objetFormatTableau['viewCount'],
             $objetFormatTableau['thumbsUpCount'],
@@ -52,7 +52,7 @@ class VideoDetailedRepository extends AbstractGetableRepository
      */
     public static function selectAll(?array $filter = []): array
     {
-        $sql = "SELECT V.id AS videoId, title, upload, V.description, C.id AS channelId, name, (SELECT COUNT(*) FROM WATCH W WHERE W.videoId = V.id) AS viewCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 1 AND W.videoId = V.id) AS thumbsUpCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 0 AND W.videoId = V.id) AS thumbsDownCount FROM VIDEOS V JOIN CHANNELS C ON C.id = V.channel WHERE ";
+        $sql = "SELECT V.id AS videoId, title, upload, V.description, extension, C.id AS channelId, name, (SELECT COUNT(*) FROM WATCH W WHERE W.videoId = V.id) AS viewCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 1 AND W.videoId = V.id) AS thumbsUpCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 0 AND W.videoId = V.id) AS thumbsDownCount FROM VIDEOS V JOIN CHANNELS C ON C.id = V.channel WHERE ";
         $values = [];
         $i = 0;
         foreach ($filter as $col=>$val) {
@@ -76,7 +76,7 @@ class VideoDetailedRepository extends AbstractGetableRepository
      */
     public static function select(string $valeurClePrimaire): ?IInsertable
     {
-        $sql = "SELECT V.id AS videoId, title, upload, V.description, C.id AS channelId, name, (SELECT COUNT(*) FROM WATCH W WHERE W.videoId = V.id) AS viewCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 1 AND W.videoId = V.id) AS thumbsUpCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 0 AND W.videoId = V.id) AS thumbsDownCount FROM VIDEOS V JOIN CHANNELS C ON C.id = V.channel WHERE V.id=:Tag";
+        $sql = "SELECT V.id AS videoId, title, upload, V.description, extension, C.id AS channelId, name, (SELECT COUNT(*) FROM WATCH W WHERE W.videoId = V.id) AS viewCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 1 AND W.videoId = V.id) AS thumbsUpCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 0 AND W.videoId = V.id) AS thumbsDownCount FROM VIDEOS V JOIN CHANNELS C ON C.id = V.channel WHERE V.id=:Tag";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 
@@ -97,7 +97,7 @@ class VideoDetailedRepository extends AbstractGetableRepository
      */
     public static function search(?array $filter = [], ?bool $and = true): array
     {
-        $sql = "SELECT V.id AS videoId, title, upload, V.description, C.id AS channelId, name, (SELECT COUNT(*) FROM WATCH W WHERE W.videoId = V.id) AS viewCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 1 AND W.videoId = V.id) AS thumbsUpCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 0 AND W.videoId = V.id) AS thumbsDownCount FROM VIDEOS V JOIN CHANNELS C ON C.id = V.channel WHERE ";
+        $sql = "SELECT V.id AS videoId, title, upload, V.description, extension, C.id AS channelId, name, (SELECT COUNT(*) FROM WATCH W WHERE W.videoId = V.id) AS viewCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 1 AND W.videoId = V.id) AS thumbsUpCount, (SELECT COUNT(*) FROM WATCH W WHERE W.thumbs = 0 AND W.videoId = V.id) AS thumbsDownCount FROM VIDEOS V JOIN CHANNELS C ON C.id = V.channel WHERE ";
         $values = [];
         foreach ($filter as $col=>$val) {
             $sql .= "$col LIKE '%{$val}%'  " . ($and ? 'AND ' : ' OR ');

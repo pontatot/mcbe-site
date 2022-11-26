@@ -22,6 +22,9 @@ if (isset($_GET['id'])) {
     }
     $video = VideoManager::getVideo($_GET['id']);
     echo "
+    <video controls>
+        <source src=\"../Assets/vid/{$video->getId()}.{$video->getExtension()}\" type=\"video/mp4\">
+    </video>
     <h1>{$video->getTitle()}</h1>
     <h2><a href='../channel?id={$video->getChannel()}'>{$video->getName()}</a></h2>
     <h3>{$video->getUpload()}</h3>
