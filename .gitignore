@@ -3,3 +3,6 @@ Conf.php
 vid/
 Logs/
 !Assets/vid/index.php
+.vscode/
+Assets/
+
