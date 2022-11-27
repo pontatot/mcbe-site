@@ -2,6 +2,7 @@
 
 namespace App\Site\Controller;
 
+use App\Site\Lib\UserConnexion;
 use App\Site\Model\Comment;
 use App\Site\Model\Video;
 use App\Site\Model\VideoView;
@@ -24,7 +25,7 @@ class VideoManager
      * @return ?Video
      */
     public static function createVideo(string $title, ?string $description, int $channel, string $ext) : ?Video {
-        return VideoRepository::insert(new Video(null, $title, $description, $channel, null, $ext)) ? VideoRepository::selectAll(['title'=>$title])[0] ?? null : null;
+        return UserConnexion::getInstance()->isConnected() && VideoRepository::insert(new Video(null, $title, $description, $channel, null, $ext)) ? VideoRepository::selectAll(['title'=>$title])[0] ?? null : null;
     }
 
     /**
@@ -51,7 +52,7 @@ class VideoManager
      * @return Video|null
      */
     public static function getVideo(int $id) : ?Video {
-        VideoViewRepository::insert(new VideoView($id, Controller::getChannelLogged()->getId()));
+        if (UserConnexion::getInstance()->isConnected()) VideoViewRepository::insert(new VideoView($id, Controller::getChannelLogged()->getId()));
         return VideoDetailedRepository::select($id);
     }
 
@@ -71,7 +72,7 @@ class VideoManager
      * @return bool
      */
     public static function thumbsUp(int $id) : bool {
-        return VideoViewRepository::update(new VideoView($id, Controller::getChannelLogged()->getId(), true));
+        return UserConnexion::getInstance()->isConnected() && VideoViewRepository::updateThumb(new VideoView($id, Controller::getChannelLogged()->getId(), true));
     }
 
     /**
@@ -79,7 +80,7 @@ class VideoManager
      * @return bool
      */
     public static function thumbsDown(int $id) : bool {
-        return VideoViewRepository::update(new VideoView($id, Controller::getChannelLogged()->getId(), false));
+        return UserConnexion::getInstance()->isConnected() && VideoViewRepository::updateThumb(new VideoView($id, Controller::getChannelLogged()->getId(), false));
     }
 
     /**
@@ -87,7 +88,7 @@ class VideoManager
      * @return bool
      */
     public static function thumbsRemove(int $id) : bool {
-        return VideoViewRepository::update(new VideoView($id, Controller::getChannelLogged()->getId()));
+        return UserConnexion::getInstance()->isConnected() && VideoViewRepository::updateThumb(new VideoView($id, Controller::getChannelLogged()->getId()));
     }
 
     /**
@@ -103,7 +104,7 @@ class VideoManager
      * @return bool
      */
     public static function comment(int $videoId, string $content) : bool {
-        return CommentRepository::insert(new Comment(null, $content, $videoId, Controller::getChannelLogged()->getId()));
+        return UserConnexion::getInstance()->isConnected() && CommentRepository::insert(new Comment(null, $content, $videoId, Controller::getChannelLogged()->getId()));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Site\Controller;
 
+use App\Site\Lib\UserConnexion;
 use App\Site\Model\Channel;
 use App\Site\Model\Subscription;
 use App\Site\Repository\ChannelDetailedRepository;
@@ -19,6 +20,15 @@ class ChannelManager
         $channel = ChannelRepository::select($id);
         if (!$channel) return false;
         return ChannelRepository::update($channel->setName($name)->setDescription($description));
+    }
+
+    public static function login(string $name, string $password) : bool {
+        $channel = ChannelRepository::selectAll(['name'=>$name]);
+        if(count($channel) == 1 && UserConnexion::paswdCheck($password, $channel[0]->getPassword())) {
+            UserConnexion::getInstance()->connect($channel[0]->getId());
+            return true;
+        }
+        return false;
     }
 
     public static function deleteChannel(int $id) : bool {
@@ -45,8 +55,12 @@ class ChannelManager
         return VideoDetailedRepository::search(['C.id'=>$id, 'title'=>$title]);
     }
 
+    public static function isSubbed(int $id) : bool {
+        return count(SubscriptionRepository::selectAll(['channelId'=>Controller::getChannelLogged()->getId(), 'subscribeId'=>$id])) != 0;
+    }
+
     public static function subscribe(int $id) : bool {
-        return SubscriptionRepository::insert(new Subscription(Controller::getChannelLogged()->getId(), $id));
+        return $id != Controller::getChannelLogged()->getId() && SubscriptionRepository::insert(new Subscription(Controller::getChannelLogged()->getId(), $id));
     }
 
     public static function unsubscribe(int $id) : bool {
