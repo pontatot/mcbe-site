@@ -4,11 +4,13 @@ use App\Site\Controller\ChannelManager;
 if (!isset($id)) $id = 0;
 if (!isset($search)) $search = null;
 $channel = ChannelManager::getChannel($id);
+$self = \App\Site\Lib\UserConnexion::getInstance()->getConnectedUserChannel();
 echo "
 <h1>{$channel->getName()}</h1>
-<h2>{$channel->getSubCount()} subscribers</h2>
-<p><a href='./?id={$id}&" . (ChannelManager::isSubbed($id) ? 'un' : '') . "subscribe'>" . (ChannelManager::isSubbed($id) ? 'un' : '') . "subscribe</a></p>
-<p>{$channel->getDescription()}</p>
+<h2>{$channel->getSubCount()} subscribers</h2>";
+if ($self && $channel->getId() != $self->getId())
+echo "<p><a href='./?id={$id}&" . (ChannelManager::isSubbed($id) ? 'un' : '') . "subscribe'>" . (ChannelManager::isSubbed($id) ? 'un' : '') . "subscribe</a></p>";
+echo "<p>{$channel->getDescription()}</p>
 <br/>
 <h3>Videos</h3>
 <form action=\".\" method=\"get\" enctype=\"multipart/form-data\">

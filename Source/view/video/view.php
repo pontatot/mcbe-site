@@ -10,7 +10,7 @@ echo "
     <h1>{$video->getTitle()}</h1>
     <h2><a href='../channel?id={$video->getChannel()}'>{$video->getName()}</a></h2>
     <h3>{$video->getUpload()}</h3>
-    <p>Views:{$video->getViewCount()} <a href='./?id={$video->getId()}&like'>thumbs up</a>: {$video->getThumbsUpCount()} <a href='./?id={$video->getId()}&dislike'>thumbs down</a>: {$video->getThumbsDownCount()}</p>
+    <p>Views:{$video->getViewCount()}</p><p><a href='./?id={$video->getId()}&like'>thumbs up</a>: {$video->getThumbsUpCount()}</p><p><a href='./?id={$video->getId()}&dislike'>thumbs down</a>: {$video->getThumbsDownCount()}</p>
     <p>{$video->getDescription()}</p>
     <br/>
     <h3>Comments</h3>
