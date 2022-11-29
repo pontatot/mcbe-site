@@ -56,7 +56,7 @@ class ChannelManager
     }
 
     public static function isSubbed(int $id) : bool {
-        return count(SubscriptionRepository::selectAll(['channelId'=>Controller::getChannelLogged()->getId(), 'subscribeId'=>$id])) != 0;
+        return !empty(SubscriptionRepository::selectAll(['channelId'=>Controller::getChannelLogged()->getId(), 'subscribeId'=>$id]));
     }
 
     public static function subscribe(int $id) : bool {

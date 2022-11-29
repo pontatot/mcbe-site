@@ -1,25 +1,24 @@
 <?php
-
-use App\Site\Controller\VideoManager;
-
-if (!isset($video)) \App\Site\Controller\Controller::redirect('./');
-echo "
+    if (!isset($video)) return;
+    if (!isset($comments)) $comments = [];
+?>
     <video controls>
-        <source src=\"../Assets/vid/{$video->getId()}.{$video->getExtension()}\" type=\"video/mp4\">
+        <source src="../Assets/vid/<?php echo $video->getId() . '.' . $video->getExtension() ?>" type="video/mp4">
     </video>
-    <h1>{$video->getTitle()}</h1>
-    <h2><a href='../channel?id={$video->getChannel()}'>{$video->getName()}</a></h2>
-    <h3>{$video->getUpload()}</h3>
-    <p>Views:{$video->getViewCount()}</p><p><a href='./?id={$video->getId()}&like'>thumbs up</a>: {$video->getThumbsUpCount()}</p><p><a href='./?id={$video->getId()}&dislike'>thumbs down</a>: {$video->getThumbsDownCount()}</p>
-    <p>{$video->getDescription()}</p>
-    <br/>
+    <h1><?php echo $video->getTitle()?></h1>
+    <h2><a href='../channel?id=<?php echo $video->getChannel()?>'><?php echo $video->getName()?></a></h2>
+    <h3><?php echo $video->getUpload()?></h3>
+    <p>Views:<?php echo $video->getViewCount()?></p>
+    <p><a href='./?id=<?php echo $video->getId()?>&like'>thumbs up</a>: <?php echo $video->getThumbsUpCount()?></p>
+    <p><a href='./?id=<?php echo $video->getId()?>&dislike'>thumbs down</a>: <?php echo $video->getThumbsDownCount()?></p>
+    <p><?php echo $video->getDescription()?></p>
     <h3>Comments</h3>
-    <form action=\"./?id={$video->getId()}\" method=\"post\" enctype=\"multipart/form-data\">
-        <label for=\"content\"></label>
-        <textarea name=\"content\" placeholder=\"comment\" id=\"content\"></textarea>
-        <input type=\"submit\" value=\"Post\">
+    <form action="./?id=<?php echo $video->getId()?>" method="post" enctype="multipart/form-data">
+        <label for="content"></label>
+        <textarea name="content" placeholder="comment" id="content"></textarea>
+        <input type="submit" value="Post">
     </form>
-    ";
-foreach (VideoManager::getComments($video->getId()) as $comment) {
+<?php
+foreach ($comments as $comment) {
     echo "<p><a href='../channel?id={$comment->getChannelId()}'>{$comment->getName()}</a>: {$comment->getContent()}</p>";
 }

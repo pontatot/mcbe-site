@@ -19,4 +19,10 @@ class Controller {
         header("Location: $url");
         exit();
     }
+
+    public static function error(string $error, int $code = 400, string $redirect = null) {
+        if ($redirect) header("refresh:5; url=" . $redirect);
+        Controller::loadView('error.php', 'Error', ['error'=>$error, 'code'=>$code, 'redirect'=>$redirect]);
+        exit();
+    }
 }

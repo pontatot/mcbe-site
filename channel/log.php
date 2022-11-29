@@ -10,15 +10,14 @@ $loader->register();
 use App\Site\Controller\Controller;
 use App\Site\Lib\UserConnexion;
 
-if (UserConnexion::getInstance()->isConnected()) {
-    UserConnexion::getInstance()->disconnect();
-    Controller::redirect('./');
-} else {
+if (!UserConnexion::getInstance()->isConnected() | isset($_POST['username'])) {
     if (isset($_POST['username']) & isset($_POST['password'])) {
         if (\App\Site\Controller\ChannelManager::login($_POST['username'], $_POST['password'])) {
             Controller::redirect('./');
         }
     }
     Controller::loadView('channel/login.php', 'login', ['username'=>($_POST['username'] ?? null), 'error'=>((isset($_POST['username']) & isset($_POST['password'])) ? 'Wrong username or password' : null)]);
-
+} else {
+    UserConnexion::getInstance()->disconnect();
+    Controller::redirect('./');
 }

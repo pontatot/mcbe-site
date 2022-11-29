@@ -9,14 +9,29 @@ $loader->register();
 
 use App\Site\Controller\ChannelManager;
 use App\Site\Controller\Controller;
+use App\Site\Lib\UserConnexion;
 
-if (!isset($_GET['search'])) $_GET['search'] = '';
+if (!isset($_GET['search'])) $_GET['search'] = null;
 if (isset($_GET['id'])) {
-    if (isset($_GET['subscribe'])) ChannelManager::subscribe($_GET['id']);
-    elseif (isset($_GET['unsubscribe'])) ChannelManager::unsubscribe($_GET['id']);
-    Controller::loadView('channel/view.php', 'channel', ['id'=>$_GET['id'], 'search'=>($_GET['search'] ?? null)]);
+    $channel = ChannelManager::getChannel($_GET['id']);
+    if (!$channel) {
+        Controller::error('Channel not found', 404, './');
+    }
+    $self = UserConnexion::getInstance()->getConnectedUserChannel();
+    $subbed = $self && ChannelManager::isSubbed($channel->getId());
+    if (isset($_GET['subscribe'])) $subbed ? ChannelManager::subscribe($channel->getId()) : Controller::error('You must be connected to subscribe', 403, './?id=' . $channel->getId());
+    elseif (isset($_GET['unsubscribe'])) $subbed ? ChannelManager::unsubscribe($channel->getId()) : Controller::error('You must be connected to subscribe', 403, './?id=' . $channel->getId());
+    if ($_GET['search'] && $_GET['search'] != '') $videos = ChannelManager::searchChannelVideos($channel->getId(), $_GET['search']);
+    else $videos = ChannelManager::getChannelVideos($channel->getId());
+    Controller::loadView('channel/view.php', $channel->getName(), ['channel'=>$channel, 'search'=>$_GET['search'], 'self'=>$self, 'videos'=>$videos, 'subbed'=>$subbed]);
 } else {
-    Controller::loadView('channel/viewall.php', 'channel', ['search'=>($_GET['search'] ?? null)]);
+    $channels = [];
+    if ($_GET['search'] && $_GET['search'] != '') {
+        $channels = ChannelManager::search($_GET['search']);
+    } else {
+        $channels = ChannelManager::getChannels();
+    }
+    Controller::loadView('channel/viewall.php', 'channel', ['search'=>$_GET['search'], 'channels'=>$channels]);
 }
 
 
