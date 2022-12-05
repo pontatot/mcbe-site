@@ -1,25 +1,19 @@
 <?php
-if (!isset($id)) $id = 0;
+
+use App\Site\Lib\Forms\FormInput;
+use App\Site\Lib\Forms\LabelledFormElement;
+
 if (!isset($search)) $search = null;
 if (!isset($self)) $self = null;
 if (!isset($channel)) return;
 if (!isset($subbed)) $subbed = false;
-?>
-<h1><?php echo $channel->getName() ?></h1>
-<h2><?php echo $channel->getSubCount() ?> subscribers</h2>
-<?php
-    if ($self && $channel->getId() != $self->getId())
-echo "<p><a href='./?id={$id}&" . ($subbed ? 'un' : '') . "subscribe'>" . ($subbed ? 'un' : '') . "subscribe</a></p>";
-?>
-    <p><?php echo $channel->getDescription() ?></p>
-<h3>Videos</h3>
-<form action="." method="get" enctype="multipart/form-data">
-    <label for="search"></label>
-    <input type='text' name="search" placeholder="Video title" value='<?php echo $search ?>' id="search"/>
-    <input type='hidden' value='$id' name='id'>
-    <input type="submit" value="Search">
-</form>
-<?php
+echo "<h1>{$channel->getName()}</h1><h2>{$channel->getSubCount()} subscribers</h2>";
+if ($self && $channel->getId() != $self->getId()) echo "<p><a href='./?id={$channel->getId()}&" . ($subbed ? 'un' : '') . "subscribe'>" . ($subbed ? 'un' : '') . "subscribe</a></p>";
+echo "<p>{$channel->getDescription()}</p><h3>Videos</h3>"
+    .new \App\Site\Lib\Forms\Form(elements: new \App\Site\Lib\Forms\FormElementGroup(
+    new FormInput('text', 'search', 'Video title', value:$_GET['search'] ?? null),
+    new FormInput('hidden', 'id', value:$channel->getId()),
+    new FormInput('submit', value:'Search')));
 if (empty($videos)) {
     echo 'No video found';
 } else {

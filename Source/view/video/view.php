@@ -1,6 +1,11 @@
 <?php
-    if (!isset($video)) return;
-    if (!isset($comments)) $comments = [];
+
+use App\Site\Lib\Forms\FormInput;
+use App\Site\Lib\Forms\FormTextArea;
+
+if (!isset($video)) return;
+if (!isset($comments)) $comments = [];
+if (!isset($channel)) $channel = null;
 ?>
     <video controls>
         <source src="../Assets/vid/<?php echo $video->getId() . '.' . $video->getExtension() ?>" type="video/mp4">
@@ -11,14 +16,14 @@
     <p>Views:<?php echo $video->getViewCount()?></p>
     <p><a href='./?id=<?php echo $video->getId()?>&like'>thumbs up</a>: <?php echo $video->getThumbsUpCount()?></p>
     <p><a href='./?id=<?php echo $video->getId()?>&dislike'>thumbs down</a>: <?php echo $video->getThumbsDownCount()?></p>
-    <p><?php echo $video->getDescription()?></p>
-    <h3>Comments</h3>
-    <form action="./?id=<?php echo $video->getId()?>" method="post" enctype="multipart/form-data">
-        <label for="content"></label>
-        <textarea name="content" placeholder="comment" id="content"></textarea>
-        <input type="submit" value="Post">
-    </form>
 <?php
+if ($channel && $channel->getId() == $video->getChannel()) {
+    echo "<p><a href='./edit.php?id={$video->getId()}'>Edit</a></p>";
+}
+echo "<p>{$video->getDescription()}</p><h3>Comments</h3>";
+if ($channel) echo (new \App\Site\Lib\Forms\Form("./?id={$video->getId()}", method:'post'))->addElement(new \App\Site\Lib\Forms\FormElementGroup(
+    new FormTextArea('content', 'Super video, I love it', true),
+    new FormInput('submit', value:'Post')));
 foreach ($comments as $comment) {
     echo "<p><a href='../channel?id={$comment->getChannelId()}'>{$comment->getName()}</a>: {$comment->getContent()}</p>";
 }

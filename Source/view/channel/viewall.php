@@ -1,12 +1,11 @@
 <?php
+
+use App\Site\Lib\Forms\FormInput;
+
 if (!isset($search)) $search = null;
-?>
-    <form action="." method="get" enctype="multipart/form-data">
-        <label for="search"></label>
-        <input type='text' name="search" placeholder="Channel name" value='<?php echo $search ?>' id="search"/>
-        <input type="submit" value="Search">
-    </form>
-<?php
+echo new \App\Site\Lib\Forms\Form(elements: new \App\Site\Lib\Forms\FormElementGroup(
+    new FormInput('text', 'search', 'Video title', value:$_GET['search'] ?? null),
+    new FormInput('submit', value:'Search')));
 if (empty($channels)) {
     echo 'No channel found';
 } else {
