@@ -9,6 +9,4 @@ if (!isset($code)) $code = 400;
 </h1>
 <?php
 
-if (isset($redirect) && $redirect) {
-    echo "<a href='$redirect'>Redirecting in 5 seconds...</a>";
-}
+if (isset($redirect) && $redirect) echo "<a href=' ". $redirect . "'>Redirecting in 5 seconds...</a>";

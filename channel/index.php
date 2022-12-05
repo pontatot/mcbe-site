@@ -18,11 +18,12 @@ if (isset($_GET['id'])) {
         Controller::error('Channel not found', 404, './');
     }
     $self = UserConnexion::getInstance()->getConnectedUserChannel();
-    $subbed = $self && ChannelManager::isSubbed($channel->getId());
-    if (isset($_GET['subscribe'])) $subbed ? ChannelManager::subscribe($channel->getId()) : Controller::error('You must be connected to subscribe', 403, './?id=' . $channel->getId());
-    elseif (isset($_GET['unsubscribe'])) $subbed ? ChannelManager::unsubscribe($channel->getId()) : Controller::error('You must be connected to subscribe', 403, './?id=' . $channel->getId());
+    if (isset($_GET['subscribe'])) $self ? ChannelManager::subscribe($channel->getId()) : Controller::error('You must be connected to subscribe', 403, './?id=' . $channel->getId());
+    elseif (isset($_GET['unsubscribe'])) $self ? ChannelManager::unsubscribe($channel->getId()) : Controller::error('You must be connected to subscribe', 403, './?id=' . $channel->getId());
     if ($_GET['search'] && $_GET['search'] != '') $videos = ChannelManager::searchChannelVideos($channel->getId(), $_GET['search']);
     else $videos = ChannelManager::getChannelVideos($channel->getId());
+    $channel = ChannelManager::getChannel($_GET['id']);
+    $subbed = $self && ChannelManager::isSubbed($channel->getId());
     Controller::loadView('channel/view.php', $channel->getName(), ['channel'=>$channel, 'search'=>$_GET['search'], 'self'=>$self, 'videos'=>$videos, 'subbed'=>$subbed]);
 } else {
     $channels = [];
@@ -31,7 +32,7 @@ if (isset($_GET['id'])) {
     } else {
         $channels = ChannelManager::getChannels();
     }
-    Controller::loadView('channel/viewall.php', 'channel', ['search'=>$_GET['search'], 'channels'=>$channels]);
+    Controller::loadView('channel/viewall.php', null, ['search'=>$_GET['search'], 'channels'=>$channels]);
 }
 
 

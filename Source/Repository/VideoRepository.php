@@ -47,6 +47,6 @@ class VideoRepository extends AbstractEditableRepository
      */
     protected static function getNomsColonnes(): array
     {
-        return ['id', 'title', 'description', 'channel', 'upload', 'extension'];
+        return ['id', 'title', 'description', 'channel', 'extension'];
     }
 }

@@ -25,7 +25,7 @@ class VideoManager
      * @return ?Video
      */
     public static function createVideo(string $title, ?string $description, int $channel, string $ext) : ?Video {
-        return UserConnexion::getInstance()->isConnected() && VideoRepository::insert(new Video(null, $title, $description, $channel, null, $ext)) ? VideoRepository::selectAll(['title'=>$title])[0] ?? null : null;
+        return (UserConnexion::getInstance()->isConnected() && VideoRepository::insert(new Video(null, $title, $description, $channel, null, $ext))) ? VideoRepository::selectAll(['title'=>$title])[0] ?? null : null;
     }
 
     /**

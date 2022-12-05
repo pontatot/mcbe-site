@@ -55,13 +55,8 @@ abstract class AbstractGetableRepository
     public static function select(string $valeurClePrimaire): ?IInsertable
     {
         $sql = "SELECT * from " . static::getNomTable() . " WHERE " . static::getNomClePrimaire() . "=:Tag";
-        // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
-
-        $values = array(
-            "Tag" => $valeurClePrimaire
-        );
-        $pdoStatement->execute($values);
+        $pdoStatement->execute(["Tag" => $valeurClePrimaire]);
         $voiture = $pdoStatement->fetch();
         if ($voiture) {
             return static::construire($voiture);
@@ -83,9 +78,6 @@ abstract class AbstractGetableRepository
         }
         $sql = substr($sql, 0, -6);
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
-//        var_dump($sql);
-//        var_dump($values);
-//        var_dump($pdoStatement);
         $pdoStatement->execute($values);
         $elements = [];
         foreach ($pdoStatement as $elementFormatTableau) {

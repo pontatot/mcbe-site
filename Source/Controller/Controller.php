@@ -8,7 +8,8 @@ class Controller {
         return UserConnexion::getInstance()->getConnectedUserChannel();
     }
 
-    public static function loadView(string $viewPath, string $pagetitle, array $args = []) : void {
+    public static function loadView(string $viewPath, ?string $pagetitle = null, array $args = []) : void {
+        $pagetitle = $pagetitle ?? 'TuTeube';
         $bodyViewPath = __DIR__ . "/../view/" . $viewPath;
         $bodyPagetitle = $pagetitle;
         extract($args);

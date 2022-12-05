@@ -42,13 +42,15 @@ class ChannelDetailedRepository extends AbstractGetableRepository
         return 'id';
     }
 
+    private static string $sqlRequest = 'SELECT id, name, description, email, (SELECT COUNT(*) FROM SUBSCRIBE S WHERE S.subscribeId = C.id) AS subCount FROM CHANNELS C ';
+
     /**
      * @param array<string, string> $filter
      * @return array<int, Channel>
      */
     public static function selectAll(?array $filter = []): array
     {
-        $sql = "SELECT id, name, description, email, (SELECT COUNT(*) FROM SUBSCRIBE S WHERE S.subscribeId = C.id) AS subCount FROM CHANNELS C WHERE ";
+        $sql = static::$sqlRequest . "WHERE ";
         $values = [];
         foreach ($filter as $col=>$val) {
             $sql .= "$col = :{$col}Tag  AND ";
@@ -70,7 +72,7 @@ class ChannelDetailedRepository extends AbstractGetableRepository
      */
     public static function select(string $valeurClePrimaire): ?IInsertable
     {
-        $sql = "SELECT id, name, description, email, (SELECT COUNT(*) FROM SUBSCRIBE S WHERE S.subscribeId = C.id) AS subCount FROM CHANNELS C WHERE " . static::getNomClePrimaire() . "=:Tag";
+        $sql = static::$sqlRequest . "WHERE " . static::getNomClePrimaire() . "=:Tag";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 
@@ -91,7 +93,7 @@ class ChannelDetailedRepository extends AbstractGetableRepository
      */
     public static function search(?array $filter = [], ?bool $and = true): array
     {
-        $sql = "SELECT id, name, description, email, (SELECT COUNT(*) FROM SUBSCRIBE S WHERE S.subscribeId = C.id) AS subCount FROM CHANNELS C WHERE ";
+        $sql = static::$sqlRequest . "WHERE S.subscribeId = C.id) AS subCount FROM CHANNELS C WHERE ";
         $values = [];
         foreach ($filter as $col=>$val) {
             $sql .= "$col LIKE '%{$val}%'  " . ($and ? 'AND ' : ' OR ');
