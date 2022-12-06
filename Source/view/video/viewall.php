@@ -4,7 +4,7 @@ use App\Site\Lib\Forms\FormInput;
 
 if (!isset($search)) $search = null;
 if (!isset($videos)) $videos = [];
-echo new \App\Site\Lib\Forms\Form(elements: new \App\Site\Lib\Forms\FormElementGroup(
+echo new \App\Site\Lib\Forms\Form(elements: new \App\Site\Lib\Forms\GroupedFormElement(
     new FormInput('text', 'search', 'Video title', value:$search),
     new FormInput('submit', value:'Search')));
 if (empty($videos)) {

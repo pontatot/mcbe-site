@@ -2,7 +2,7 @@
 
 namespace App\Site\Lib\Forms;
 
-class FormElementGroup extends AbstractFormElement
+class GroupedFormElement extends AbstractFormElement
 {
     private array $elements;
 
@@ -14,7 +14,7 @@ class FormElementGroup extends AbstractFormElement
         $this->elements = $elements;
     }
 
-    public function addElement(AbstractFormElement ...$elements) : FormElementGroup {
+    public function addElement(AbstractFormElement ...$elements) : GroupedFormElement {
         $this->elements = array_merge($this->elements, $elements);
         return $this;
     }

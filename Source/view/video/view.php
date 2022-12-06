@@ -21,7 +21,7 @@ if ($channel && $channel->getId() == $video->getChannel()) {
     echo "<p><a href='./edit.php?id={$video->getId()}'>Edit</a></p>";
 }
 echo "<p>{$video->getDescription()}</p><h3>Comments</h3>";
-if ($channel) echo (new \App\Site\Lib\Forms\Form("./?id={$video->getId()}", method:'post'))->addElement(new \App\Site\Lib\Forms\FormElementGroup(
+if ($channel) echo (new \App\Site\Lib\Forms\Form("./?id={$video->getId()}", method:'post'))->addElement(new \App\Site\Lib\Forms\GroupedFormElement(
     new FormTextArea('content', 'Super video, I love it', true),
     new FormInput('submit', value:'Post')));
 foreach ($comments as $comment) {

@@ -1,8 +1,6 @@
 Conf.php
 .idea/
-vid/
 Logs/
-!Assets/vid/index.php
 .vscode/
 Assets/
 
