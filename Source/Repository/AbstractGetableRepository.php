@@ -74,7 +74,6 @@ abstract class AbstractGetableRepository
         $values = [];
         foreach ($filter as $col=>$val) {
             $sql .= " $col LIKE '%$val%'  " . ($and ? 'AND ' : ' OR ');
-//            $values[$col . 'Tag'] = $val;
         }
         $sql = substr($sql, 0, -6);
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);

@@ -2,6 +2,7 @@
 namespace App\Site\Controller;
 use App\Site\Lib\UserConnexion;
 use App\Site\Model\Channel;
+use JetBrains\PhpStorm\NoReturn;
 
 class Controller {
     public static function getChannelLogged() : ?Channel {
@@ -16,11 +17,13 @@ class Controller {
         require __DIR__ . "/../view/view.php";
     }
 
-    public static function redirect(string $url) : void {
+    #[NoReturn]
+    public static function redirect(string $url): void {
         header("Location: $url");
         exit();
     }
 
+    #[NoReturn]
     public static function error(string $error, int $code = 400, string $redirect = null) : void {
         if ($redirect) header("refresh:5; url=" . $redirect);
         Controller::loadView('error.php', 'Error', ['error'=>$error, 'code'=>$code, 'redirect'=>$redirect]);

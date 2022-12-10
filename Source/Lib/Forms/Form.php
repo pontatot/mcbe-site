@@ -14,9 +14,10 @@ class Form extends AbstractFormElement
     /**
      * @param string|null $action
      * @param string|null $submit
-     * @param ?string $target
      * @param ?string $method
      * @param bool $autocomplete
+     * @param ?string $target
+     * @param AbstractFormElement ...$elements
      */
     public function __construct(?string $action = null, ?string $submit = null, ?string $method = null, bool $autocomplete = null, ?string $target = null, AbstractFormElement ... $elements)
     {

@@ -60,7 +60,7 @@ class ClassLoader
      * @return string|bool The mapped file name on success, or boolean false on
      * failure.
      */
-    public function loadClass(string $class)
+    public function loadClass(string $class): bool|string
     {
         // the current namespace prefix
         $prefix = $class;
@@ -98,7 +98,7 @@ class ClassLoader
      * @return string|bool Boolean false if no mapped file can be loaded, or the
      * name of the mapped file that was loaded.
      */
-    protected function loadMappedFile(string $prefix, string $relative_class)
+    protected function loadMappedFile(string $prefix, string $relative_class): bool|string
     {
         // are there any base directories for this namespace prefix?
         if (isset($this->prefixes[$prefix]) === false) {

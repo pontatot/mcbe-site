@@ -32,7 +32,7 @@ abstract class AbstractEditableRepository extends AbstractGetableRepository
     }
 
     /**
-     * @param T $object
+     * @param IInsertable $object
      * @return bool
      */
     public static function deleteElement(IInsertable $object): bool
@@ -51,7 +51,7 @@ abstract class AbstractEditableRepository extends AbstractGetableRepository
     }
 
     /**
-     * @param T $object
+     * @param IInsertable $object
      * @return bool
      */
     public static function update(IInsertable $object) : bool {
@@ -68,17 +68,17 @@ abstract class AbstractEditableRepository extends AbstractGetableRepository
         try {
             DatabaseConnection::getPdo()->prepare($sql)->execute($values);
             return true;
-        } catch(PDOException $e) {
+        } catch(PDOException) {
             return false;
         }
     }
 
     /**
-     * @param T $object
+     * @param IInsertable $object
      * @return bool
      */
     public static function insert(IInsertable $object) : bool {
-        $sql = "INSERT INTO " . static::getNomTable() . " (";
+        $sql = "INSERT INTO " . static::getNomTable() . "(";
         foreach (static::getNomsColonnes() as $col) {
             $sql .= $col . ", ";
         }
@@ -93,7 +93,7 @@ abstract class AbstractEditableRepository extends AbstractGetableRepository
         try {
             DatabaseConnection::getPdo()->prepare($sql)->execute($values);
             return true;
-        } catch(PDOException $e) {
+        } catch(PDOException) {
             return false;
         }
     }

@@ -37,7 +37,7 @@ class VideoManager
      */
     public static function updateVideo(int $id, string $title, ?string $description) : bool {
         $video = VideoRepository::select($id);
-        return $video && VideoRepository::update($video->setTitle($title)->setDescription($description));
+        return get_class($video) == Video::class && VideoRepository::update($video->setTitle($title)->setDescription($description));
     }
 
     /**
@@ -87,7 +87,7 @@ class VideoManager
     public static function thumbGet(int $videoId) : ?bool {
         try {
             return VideoViewRepository::selectAll(['videoId'=>$videoId, 'channelId'=>UserConnexion::getInstance()->getConnectedUserChannel()->getId()])[0]->getThumbs();
-        } catch (Error $e) {
+        } catch (Error) {
             return null;
         }
     }
@@ -126,7 +126,8 @@ class VideoManager
      * @return bool
      */
     public static function editComment(int $comment, string $content) : bool {
-        return CommentRepository::update(CommentRepository::select($comment)->setContent($content));
+        $comment = CommentRepository::select($comment);
+        return get_class($comment) == Comment::class && CommentRepository::update($comment->setContent($content));
     }
 
     /**

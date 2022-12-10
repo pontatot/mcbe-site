@@ -3,7 +3,6 @@
 use App\Site\Lib\Forms\Form;
 use App\Site\Lib\Forms\FormInput;
 use App\Site\Lib\Forms\GroupedFormElement;
-use App\Site\Lib\Forms\LabelledFormElement;
 
 if (!isset($search)) $search = null;
 if (!isset($self)) $self = null;

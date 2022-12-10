@@ -17,7 +17,7 @@ if (!isset($channel)) $channel = null;
     <h3><?php echo $video->getUpload()?></h3>
     <p>Views:<?php echo $video->getViewCount()?></p>
 <?php
-if (!isset($thumb) || is_null($thumb)) {
+if (!isset($thumb)) {
     echo "<p><a href='./?id={$video->getId()}&like'>thumbs up</a>: {$video->getThumbsUpCount()}</p>";
     echo "<p><a href='./?id={$video->getId()}&dislike'>thumbs down</a>: {$video->getThumbsDownCount()}</p>";
 } else {

@@ -20,7 +20,7 @@ class DatabaseConnection
         $password = Conf::getPassword();
         try {
             $this->pdo = new PDO("mysql:host=$hostname;dbname=$databaseName", $login, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-        } catch (PDOException $e) {
+        } catch (PDOException) {
             echo 'Failed to connect to database';
             exit();
         }

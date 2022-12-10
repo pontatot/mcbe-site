@@ -24,7 +24,6 @@ if (isset($_GET['id'])) {
             Controller::redirect('./');
         }
         Controller::error("Couldn't delete {$video->getTitle()}" . (!$db ? ', Failed to remove from database' : '') . (!$file ? ', Failed to remove video file' : ''), 500, "./?id={$video->getId()}");
-        exit();
     }
     if (isset($_POST['title'])) $video->setTitle($_POST['title']);
     if (isset($_POST['description'])) $video->setDescription($_POST['description']);

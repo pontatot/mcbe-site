@@ -46,11 +46,11 @@ class ChannelManager
     }
 
     public static function getChannelVideos(int $id) : array {
-        return VideoDetailedRepository::selectAll(['C.id'=>$id]);
+        return VideoDetailedRepository::selectAll(['channelId'=>$id]);
     }
 
     public static function searchChannelVideos(int $id, string $title) : array {
-        return VideoDetailedRepository::search(['C.id'=>$id, 'title'=>$title]);
+        return VideoDetailedRepository::search(['channelId'=>$id, 'title'=>$title]);
     }
 
     public static function isSubbed(int $id) : bool {

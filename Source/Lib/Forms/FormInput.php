@@ -25,6 +25,7 @@ class FormInput extends AbstractFormElement
      * @param bool|null $disabled
      * @param int|null $maxlength
      * @param string|null $pattern
+     * @param string|null $accept
      */
     public function __construct(string $type, ?string $name = null, ?string $placeholder = null, ?bool $required = null, ?string $value = null, ?bool $readonly = null, ?bool $disabled = null, ?int $maxlength = null, ?string $pattern = null, ?string $accept = null)
     {
