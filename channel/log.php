@@ -7,12 +7,13 @@ $loader->addNamespace('App\Site', __DIR__ . '/../Source');
 // register the autoloader
 $loader->register();
 
+use App\Site\Controller\ChannelManager;
 use App\Site\Controller\Controller;
 use App\Site\Lib\UserConnexion;
 
 if (!UserConnexion::getInstance()->isConnected() | isset($_POST['username'])) {
     if (isset($_POST['username']) & isset($_POST['password'])) {
-        if (\App\Site\Controller\ChannelManager::login($_POST['username'], $_POST['password'])) {
+        if (ChannelManager::login($_POST['username'], $_POST['password'])) {
             Controller::redirect('./');
         }
     }

@@ -95,7 +95,7 @@ class CommentDetailedRepository extends AbstractGetableRepository
     {
         $sql = static::$sqlRequest . "WHERE ";
         foreach ($filter as $col=>$val) {
-            $sql .= "$col LIKE '%{$val}%'  " . ($and ? 'AND ' : ' OR ');
+            $sql .= "$col LIKE '%$val%'  " . ($and ? 'AND ' : ' OR ');
         }
         $sql = substr($sql, 0, -6);
         $pdoStatement = DatabaseConnection::getPdo()->query($sql);

@@ -102,7 +102,7 @@ class VideoDetailedRepository extends AbstractGetableRepository
         $sql = static::$sqlString . ' WHERE ';
         $values = [];
         foreach ($filter as $col=>$val) {
-            $sql .= "$col LIKE '%{$val}%'  " . ($and ? 'AND ' : ' OR ');
+            $sql .= "$col LIKE '%$val%'  " . ($and ? 'AND ' : ' OR ');
 //            $values[$col . 'Tag'] = $val;
         }
         $sql = substr($sql, 0, -6);

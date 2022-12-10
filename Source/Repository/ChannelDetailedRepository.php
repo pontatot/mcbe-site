@@ -96,7 +96,7 @@ class ChannelDetailedRepository extends AbstractGetableRepository
         $sql = static::$sqlRequest . "WHERE S.subscribeId = C.id) AS subCount FROM CHANNELS C WHERE ";
         $values = [];
         foreach ($filter as $col=>$val) {
-            $sql .= "$col LIKE '%{$val}%'  " . ($and ? 'AND ' : ' OR ');
+            $sql .= "$col LIKE '%$val%'  " . ($and ? 'AND ' : ' OR ');
 //            $values[$col . 'Tag'] = $val;
         }
         $sql = substr($sql, 0, -6);

@@ -70,10 +70,10 @@ abstract class AbstractGetableRepository
      */
     public static function search(?array $filter = [], ?bool $and = true): array
     {
-        $sql = "SELECT * FROM " . static::getNomTable() . " WHERE ";
+        $sql = "SELECT * FROM " . static::getNomTable() . "  WHERE";
         $values = [];
         foreach ($filter as $col=>$val) {
-            $sql .= "$col LIKE '%{$val}%'  " . ($and ? 'AND ' : ' OR ');
+            $sql .= " $col LIKE '%$val%'  " . ($and ? 'AND ' : ' OR ');
 //            $values[$col . 'Tag'] = $val;
         }
         $sql = substr($sql, 0, -6);

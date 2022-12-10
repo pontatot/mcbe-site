@@ -11,6 +11,7 @@ use App\Site\Repository\CommentRepository;
 use App\Site\Repository\VideoDetailedRepository;
 use App\Site\Repository\VideoRepository;
 use App\Site\Repository\VideoViewRepository;
+use Error;
 
 /**
  *
@@ -86,7 +87,7 @@ class VideoManager
     public static function thumbGet(int $videoId) : ?bool {
         try {
             return VideoViewRepository::selectAll(['videoId'=>$videoId, 'channelId'=>UserConnexion::getInstance()->getConnectedUserChannel()->getId()])[0]->getThumbs();
-        } catch (\Error) {
+        } catch (Error $e) {
             return null;
         }
     }

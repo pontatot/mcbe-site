@@ -1,14 +1,16 @@
 <?php
 
+use App\Site\Lib\Forms\Form;
 use App\Site\Lib\Forms\FormInput;
 use App\Site\Lib\Forms\FormTextArea;
 use App\Site\Lib\Forms\LabelledFormElement;
+use App\Site\Model\Channel;
 
-if (!isset($channel)) $channel = new \App\Site\Model\Channel();
+if (!isset($channel)) $channel = new Channel();
 if (isset($error)) echo "<p>$error</p>";
 
 echo (isset($_GET['error'])? "<h1>{$_GET['error']}</h1>": "");
-echo (new \App\Site\Lib\Forms\Form('./edit.php', 'Sign up', 'post'))->addElement((new LabelledFormElement('Channel name',
+echo (new Form('./edit.php', 'Sign up', 'post'))->addElement((new LabelledFormElement('Channel name',
         new FormInput('text', 'channel_username', 'MCBE Craft', true, $channel->getName() ?? null)))->setId('channel_username'),
     (new LabelledFormElement('Email',
         new FormInput('email', 'email', 'mcbe.craft0@gmail.com', true, $channel->getEmail() ?? null)))->setId('email'),
