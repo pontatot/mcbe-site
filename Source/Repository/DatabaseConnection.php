@@ -21,8 +21,7 @@ class DatabaseConnection
         try {
             $this->pdo = new PDO("mysql:host=$hostname;dbname=$databaseName", $login, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         } catch (PDOException $e) {
-//            $lang = Controller::getLang();
-//            echo $lang::getItem('error_database-connection');
+            echo 'Failed to connect to database';
             exit();
         }
 

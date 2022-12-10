@@ -16,12 +16,12 @@ class Controller {
         require __DIR__ . "/../view/view.php";
     }
 
-    public static function redirect(string $url) {
+    public static function redirect(string $url) : void {
         header("Location: $url");
         exit();
     }
 
-    public static function error(string $error, int $code = 400, string $redirect = null) {
+    public static function error(string $error, int $code = 400, string $redirect = null) : void {
         if ($redirect) header("refresh:5; url=" . $redirect);
         Controller::loadView('error.php', 'Error', ['error'=>$error, 'code'=>$code, 'redirect'=>$redirect]);
         exit();

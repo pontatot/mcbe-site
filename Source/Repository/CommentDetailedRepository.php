@@ -39,7 +39,7 @@ class CommentDetailedRepository extends AbstractGetableRepository
      */
     protected static function getNomClePrimaire(): string
     {
-        return 'commentId';
+        return 'C.id';
     }
 
     private static string $sqlRequest = 'SELECT C.id AS commentId, videoId, content, postDate, channelId, name FROM COMMENTS C JOIN VIDEOS V ON V.id = C.videoId JOIN CHANNELS CH ON CH.id = C.channelId ';

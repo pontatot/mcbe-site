@@ -13,7 +13,11 @@ $user = \App\Site\Lib\UserConnexion::getInstance()->getConnectedUserChannel();
 <body>
     <header>
         <?php
-        echo "<a href='../channel/log.php'>" . ($user ? $user->getName() : 'log in') . "</a>";
+        if ($user) {
+            echo "<a href='../channel/?id={$user->getId()}'>{$user->getName()}</a> <a href='../channel/log.php'>log out</a> <a href='../video/edit.php'>upload</a>";
+        } else {
+            echo "<a href='../channel/log.php'>log in</a> <a href='../channel/edit.php'>sign up</a>";
+        }
         ?>
         <p>
             <a href="../video">Videos</a>

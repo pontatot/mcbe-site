@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Site\Lib;
-
-use App\Site\Config\conf;
 use App\Site\Controller\ChannelManager;
+use App\Site\Config\Conf;
 use App\Site\HTTP\Session;
 use App\Site\Model\Channel;
 

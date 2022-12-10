@@ -12,14 +12,12 @@ use App\Site\Repository\VideoDetailedRepository;
 
 class ChannelManager
 {
-    public static function createChannel(string $name, ?string $description, int $email, string $password) : bool {
+    public static function createChannel(string $name, ?string $description, string $email, string $password) : bool {
         return ChannelRepository::insert(new Channel(null, $name, $description, $email, $password));
     }
 
-    public static function updateChannel(int $id, string $name, ?string $description) : bool {
-        $channel = ChannelRepository::select($id);
-        if (!$channel) return false;
-        return ChannelRepository::update($channel->setName($name)->setDescription($description));
+    public static function updateChannel(Channel $channel) : bool {
+        return ChannelRepository::update($channel);
     }
 
     public static function login(string $name, string $password) : bool {
@@ -35,7 +33,7 @@ class ChannelManager
         return ChannelRepository::delete($id);
     }
 
-    public static function getChannel(int $id) : ?Channel {
+    public static function getChannel(int|string $id) : ?Channel {
         return ChannelDetailedRepository::select($id);
     }
 

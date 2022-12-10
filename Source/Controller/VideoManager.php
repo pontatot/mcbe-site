@@ -83,6 +83,14 @@ class VideoManager
         return UserConnexion::getInstance()->isConnected() && VideoViewRepository::updateThumb(new VideoView($id, Controller::getChannelLogged()->getId(), false));
     }
 
+    public static function thumbGet(int $videoId) : ?bool {
+        try {
+            return VideoViewRepository::selectAll(['videoId'=>$videoId, 'channelId'=>UserConnexion::getInstance()->getConnectedUserChannel()->getId()])[0]->getThumbs();
+        } catch (\Error) {
+            return null;
+        }
+    }
+
     /**
      * @param int $id
      * @return bool
@@ -96,6 +104,10 @@ class VideoManager
      */
     public static function getComments(int $videoId) : array {
         return CommentDetailedRepository::selectAll(['videoId'=>$videoId]);
+    }
+
+    public static function getComment(int $commentId) : ?Comment {
+        return CommentDetailedRepository::select($commentId);
     }
 
     /**

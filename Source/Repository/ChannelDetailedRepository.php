@@ -29,7 +29,7 @@ class ChannelDetailedRepository extends AbstractGetableRepository
             $objetFormatTableau['name'],
             $objetFormatTableau['description'],
             $objetFormatTableau['email'],
-            null,
+            $objetFormatTableau['password'],
             $objetFormatTableau['subCount']
         );
     }
@@ -42,7 +42,7 @@ class ChannelDetailedRepository extends AbstractGetableRepository
         return 'id';
     }
 
-    private static string $sqlRequest = 'SELECT id, name, description, email, (SELECT COUNT(*) FROM SUBSCRIBE S WHERE S.subscribeId = C.id) AS subCount FROM CHANNELS C ';
+    private static string $sqlRequest = 'SELECT id, name, description, email, password, (SELECT COUNT(*) FROM SUBSCRIBE S WHERE S.subscribeId = C.id) AS subCount FROM CHANNELS C ';
 
     /**
      * @param array<string, string> $filter

@@ -17,6 +17,15 @@ if (!$channel) {
 if (isset($_GET['id'])) {
     $video = VideoManager::getVideo($_GET['id']);
     if ($video->getChannel() != $channel->getId()) Controller::error('You do not have access to this video', 403, './?id=' . $_GET['id']);
+    if (isset($_GET['delete'])) {
+        $db = VideoManager::deleteVideo($video->getId());
+        $file = unlink("../Assets/vid/{$video->getId()}.{$video->getExtension()}");
+        if ($db and $file) {
+            Controller::redirect('./');
+        }
+        Controller::error("Couldn't delete {$video->getTitle()}" . (!$db ? ', Failed to remove from database' : '') . (!$file ? ', Failed to remove video file' : ''), 500, "./?id={$video->getId()}");
+        exit();
+    }
     if (isset($_POST['title'])) $video->setTitle($_POST['title']);
     if (isset($_POST['description'])) $video->setDescription($_POST['description']);
     if (isset($_POST['title']) & isset($_POST['description'])) {

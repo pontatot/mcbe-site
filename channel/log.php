@@ -19,5 +19,5 @@ if (!UserConnexion::getInstance()->isConnected() | isset($_POST['username'])) {
     Controller::loadView('channel/login.php', 'login', ['username'=>($_POST['username'] ?? null), 'error'=>((isset($_POST['username']) & isset($_POST['password'])) ? 'Wrong username or password' : null)]);
 } else {
     UserConnexion::getInstance()->disconnect();
-    Controller::redirect('./');
+    Controller::redirect('../');
 }

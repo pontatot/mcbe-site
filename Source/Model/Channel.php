@@ -5,21 +5,21 @@ namespace App\Site\Model;
 class Channel implements IInsertable
 {
     protected ?int $id;
-    protected string $name;
+    protected ?string $name;
     protected ?string $description;
-    protected string $email;
+    protected ?string $email;
     private ?string $password;
     private ?int $subCount;
 
     /**
      * @param int|null $id
-     * @param string $name
+     * @param string|null $name
      * @param string|null $description
-     * @param string $email
+     * @param string|null $email
      * @param ?string $password
      * @param ?int $subCount
      */
-    public function __construct(?int $id, string $name, ?string $description, string $email, ?string $password, ?int $subCount = null)
+    public function __construct(?int $id = null, string $name = null, ?string $description = null, string $email = null, ?string $password = null, ?int $subCount = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -50,9 +50,9 @@ class Channel implements IInsertable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -86,9 +86,9 @@ class Channel implements IInsertable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

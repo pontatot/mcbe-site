@@ -64,6 +64,7 @@ abstract class AbstractEditableRepository extends AbstractGetableRepository
         }
         $sql = substr($sql, 0, -2);
         $sql .= " WHERE " . static::getNomClePrimaire() . "=:" . static::getNomClePrimaire() . "Tag";
+        $values[static::getNomClePrimaire() . "Tag"] = $elementTable[static::getNomClePrimaire()];
         try {
             DatabaseConnection::getPdo()->prepare($sql)->execute($values);
             return true;
