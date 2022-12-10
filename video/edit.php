@@ -12,7 +12,7 @@ use App\Site\Controller\VideoManager;
 
 $channel = Controller::getChannelLogged();
 if (!$channel) {
-    Controller::error('You must be connected', 403, './ ' . isset($_GET['id']) ? '?id=' . $_GET['id'] : '');
+    Controller::error('You must be connected', 403, './' . (isset($_GET['id']) ? '?id=' . $_GET['id'] : ''));
 }
 if (isset($_GET['id'])) {
     $video = VideoManager::getVideo($_GET['id']);

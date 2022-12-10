@@ -1,4 +1,5 @@
 <h1>!You are about to delete your channel!</h1>
+<h2>This will delete all your videos</h2>
 <p>Confirm your password to continue</p>
 <?php
 

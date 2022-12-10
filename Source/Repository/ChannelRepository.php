@@ -16,7 +16,7 @@ class ChannelRepository extends AbstractEditableRepository
      */
     protected static function getNomsColonnes(): array
     {
-        return ['id', 'name', 'description', 'email', 'password'];
+        return ['name', 'description', 'email', 'password'];
     }
 
     /**
